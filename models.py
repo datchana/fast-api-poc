@@ -8,6 +8,15 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
+    email = Column(String(18), unique=True, index=True)
+    is_active = Column(Boolean, default=True)
+
+    items = relationship("Item", back_populates="owner")
+
+class CopyUser(Base):
+    __tablename__ = "copy"
+
+    id = Column(Integer, primary_key=True, index=True)
     email = Column(String(16), unique=True, index=True)
     hashed_password = Column(String(30))
     is_active = Column(Boolean, default=True)
